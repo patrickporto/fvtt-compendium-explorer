@@ -1,7 +1,7 @@
 {
-  "name": "module",
-  "title": "New Module",
-  "description": "",
+  "name": "compendiumexplorer",
+  "title": "Compendium Explorer",
+  "description": "Explore spells, items, and creatures from Compendium easier\n\n",
   "version": "This is auto replaced",
   "library": "false",
   "manifestPlusVersion": "1.0.0",
@@ -9,25 +9,22 @@
   "compatibleCoreVersion": "0.8.8",
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "Patrick Porto",
+      "url": "https://github.com/patrickporto",
+      "discord": "patrickporto#9260"
     }
   ],
   "dependencies": [
 
   ],
   "conflicts": [
-    
+
   ],
   "esmodules": [
-    "/scripts/module.js"
-  ],
-  "scripts": [
-    "/scripts/lib/lib.js"
+    "/scripts/compendiumexplorer.js"
   ],
   "styles": [
-    "/styles/module.css"
+    "/styles/compendiumexplorer.css"
   ],
   "languages": [
     {
