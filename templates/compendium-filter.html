@@ -1,0 +1,35 @@
+<form id="compendium-filter" class="sheet compendium-filter__container" autocomplete="off">
+    <section class="compendium-filter__filters">
+        {{#each categories as |category|}}
+            <h3 class="form-header">
+                {{#if category.icon}}<i class="fas fa-{{category.icon}} fa-fw"></i> {{/if}}{{category.label}}
+            </h3>
+            {{#each category.filters as |filter|}}
+                <div class="form-group">
+                    <label class="resource-label">{{localize filter.label}}</label>
+                    {{#if filter.choices}}
+                        <select name="{{filter.field}}">
+                            <option value=""></option>
+                            {{#each filter.choices as |choice key|}}
+                            <option value="{{choice.value}}">{{localize choice.label}}</option>
+                            {{/each}}
+                        </select>
+                    {{else}}
+                    <input
+                        type="text"
+                        name="{{filter.field}}"
+                    />
+                    {{/if}}
+                </div>
+            {{/each}}
+        {{/each}}
+     </section>
+    <footer class="sheet-footer compendium-filter__actions">
+        <button class="compendium-filter__clear" type="button">
+            Clear
+        </button>
+        <button class="compendium-filter__apply" type="button">
+            Apply
+        </button>
+    </footer>
+</form>
