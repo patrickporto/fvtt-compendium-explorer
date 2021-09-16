@@ -38,7 +38,7 @@ class CompendiumExplorerFilter {
   }
 
   _handleFilter = async () => {
-    const directoryItems = this.html.find(".directory-list > .directory-item")
+    const directoryItems = this.html.find(".directory-list .directory-item:not(.compendium-folder):not(.hidden)")
     const formData = $("#compendium-filter").serializeArray()
     const results = await Promise.all(directoryItems.map((_, directoryItem) => this.isFiltered(formData, directoryItem)))
     directoryItems.css({ display: "none"}).filter((index, directoryItem) => {
