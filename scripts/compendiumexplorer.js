@@ -1,14 +1,19 @@
 import CompendiumExplorerSidebar from "./compendiumExplorerSidebar.js";
 import {SYSTEM_PATH} from "./constants.js";
 
-Hooks.once('init', async function() {
-
-});
+const getSystemSettings = async () => {
+  try {
+    const system = await import(`${SYSTEM_PATH}/${game.system.id}.js`)
+    return system.default;
+  } catch (e) {
+    const system = await import(`${SYSTEM_PATH}/generic.js`)
+    return system.default
+  }
+}
 
 Hooks.on("renderCompendium", async (app, html, data) => {
-  const system = await import(`${SYSTEM_PATH}/${game.system.id}.js`)
   const compendiumExplorerFilter = new CompendiumExplorerSidebar({
-    system: system.default,
+    system: await getSystemSettings(),
     app,
     data,
     html
