@@ -68,6 +68,35 @@ const system = {
           type: "check",
         },
       }
+    },
+    equipments: {
+      label: "ITEM.TypeEquipment",
+      templateTypes: ['equipment'],
+      filters:{
+        price: {
+          label: "DND5E.Price",
+          field: "data.data.price",
+        }
+      }
+    },
+    weapon: {
+      label: "ITEM.TypeWeapon",
+      templateTypes: ['weapon'],
+      filters:{
+        price: {
+          label: "DND5E.ItemWeaponType",
+          field: "data.data.weaponType",
+          choices: [
+            {label: "DND5E.WeaponSimpleM", value: "simpleM"},
+            {label: "DND5E.WeaponSimpleR", value: "simpleR"},
+            {label: "DND5E.WeaponMartialM", value: "martialM"},
+            {label: "DND5E.WeaponMartialR", value: "martialR"},
+            {label: "DND5E.WeaponNatural", value: "natural"},
+            {label: "DND5E.WeaponImprov", value: "improv"},
+            {label: "DND5E.WeaponSiege", value: "siege"}
+          ],
+        }
+      }
     }
   }
 }

@@ -26,7 +26,6 @@ class CompendiumExplorerSidebar {
     for (const data of formData) {
       if (!data.value) continue
       const itemValue = getProperty(document, data.name) || ""
-      const itemType = getType(itemValue)
       if (getType(itemValue) === "string") {
         result = result && itemValue.localeCompare(data.value, game.i18n.lang, {
           sensitivity: 'base'
