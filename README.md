@@ -16,7 +16,6 @@ Explore spells, items, and creatures from Compendium easier.
 
 * Filter by item type.
 * Filter the compendium items with text field, checkbox or select field.
-* Partial support to [Compendium Folders](https://github.com/earlSt1/vtt-compendium-folders).
 
 ## Current System Compatibility:
 
