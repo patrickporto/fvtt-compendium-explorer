@@ -1,5 +1,5 @@
-<form id="compendium-filter" class="sheet compendium-filter__container" autocomplete="off">
-    <section class="compendium-filter__filters">
+<form id="compendium-explorer" class="sheet compendium-explorer__container" autocomplete="off">
+    <section class="compendium-explorer__filters">
         {{#each categories as |category|}}
             <h3 class="form-header">
                 {{#if category.icon}}<i class="fas fa-{{category.icon}} fa-fw"></i> {{/if}}{{category.label}}
@@ -24,11 +24,11 @@
             {{/each}}
         {{/each}}
      </section>
-    <footer class="sheet-footer compendium-filter__actions">
-        <button class="compendium-filter__clear" type="button">
+    <footer class="sheet-footer compendium-explorer__actions">
+        <button class="compendium-explorer__clear" type="button">
             Clear
         </button>
-        <button class="compendium-filter__apply" type="button">
+        <button class="compendium-explorer__apply" type="button">
             Apply
         </button>
     </footer>

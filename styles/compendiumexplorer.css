@@ -1,4 +1,4 @@
-.compendium-filter__container {
+.compendium-explorer__container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -7,11 +7,16 @@
     margin-right: 10px;
 }
 
-.compendium-filter__actions {
+.compendium-explorer__actions {
     display: flex;
     flex-direction: row;
 }
 
-.window-app .window-content.compendium-filter__window-content {
+.window-app .window-content.compendium-explorer__window-content {
     flex-direction: row;
+}
+
+.directory .directory-list.compendium-explorer__directory-list {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,6 @@
 import {TEMPLATE_PATH} from "./constants.js";
 
-class CompendiumExplorerFilter {
+class CompendiumExplorerSidebar {
   metadata = {
     width: 320,
   }
@@ -23,7 +23,7 @@ class CompendiumExplorerFilter {
     return game.user.isGM
   }
 
-  isFiltered = async(formData, directoryItem) => {
+  applyFilter = async(formData, directoryItem) => {
     const documentId = directoryItem.dataset.documentId
     const document = await this.compendium.getDocument(documentId)
     let result = true
@@ -39,15 +39,15 @@ class CompendiumExplorerFilter {
 
   _handleFilter = async () => {
     const directoryItems = this.html.find(".directory-list .directory-item:not(.compendium-folder):not(.hidden)")
-    const formData = $("#compendium-filter").serializeArray()
-    const results = await Promise.all(directoryItems.map((_, directoryItem) => this.isFiltered(formData, directoryItem)))
+    const formData = $("#compendium-explorer").serializeArray()
+    const results = await Promise.all(directoryItems.map((_, directoryItem) => this.applyFilter(formData, directoryItem)))
     directoryItems.css({ display: "none"}).filter((index, directoryItem) => {
       return results[index]
     }).css({display: "flex"})
   }
 
   _handleClear = async () => {
-    const directoryItems = this.html.find(".directory-list > .directory-item")
+    const directoryItems = this.html.find(".directory-list > .directory-item:not(.compendium-folder):not(.hidden)")
     directoryItems.css({display: "flex"})
   }
 
@@ -57,7 +57,7 @@ class CompendiumExplorerFilter {
       width: `${width + this.metadata.width}px`
     })
 
-    this.html.closest(".app").find('.window-content').addClass('compendium-filter__window-content')
+    this.html.closest(".app").find('.window-content').addClass('compendium-explorer__window-content')
   }
 
   getTemplateData = () => {
@@ -77,13 +77,15 @@ class CompendiumExplorerFilter {
 
   async render() {
     this.cleanTemplateContainer()
-    if (this.html.closest(".app").find('#compendium-filter').length > 0) return
-    const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-filter.html`, this.getTemplateData())
+    if (this.html.closest(".app").find('#compendium-explorer').length > 0) return
+    const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-explorer.html`, this.getTemplateData())
     const $template = $(template)
-    $template.find(".compendium-filter__apply").on('click', this._handleFilter)
-    $template.find(".compendium-filter__clear").on('click', this._handleClear)
-    $template.insertBefore(this.html.closest(".app").find('.compendium.directory'));
+    $template.find(".compendium-explorer__apply").on('click', this._handleFilter)
+    $template.find(".compendium-explorer__clear").on('click', this._handleClear)
+    const container = this.html.closest(".app").find('.compendium.directory')
+    container.find(".directory-list").addClass('compendium-explorer__directory-list')
+    $template.insertBefore(container);
   }
 }
 
-export default CompendiumExplorerFilter
+export default CompendiumExplorerSidebar
