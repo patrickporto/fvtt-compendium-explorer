@@ -1,4 +1,4 @@
-import createSystemSettings from "../scripts/systemSettings.js";
+import {createSystemSettings} from "../scripts/systemSettings.js";
 
 const system = {}
 

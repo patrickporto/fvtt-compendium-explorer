@@ -19,10 +19,6 @@ class CompendiumExplorerSidebar {
     this.compendiumTypes = new Set(Array.from(this.compendium.index).map(item => item.type))
   }
 
-  _userCanView() {
-    return game.user.isGM
-  }
-
   applyFilter = async(formData, directoryItem) => {
     const documentId = directoryItem.dataset.documentId
     const document = await this.compendium.getDocument(documentId)
@@ -30,9 +26,18 @@ class CompendiumExplorerSidebar {
     for (const data of formData) {
       if (!data.value) continue
       const itemValue = getProperty(document, data.name) || ""
-      result = result && itemValue.localeCompare(data.value, game.i18n.lang, {
-        sensitivity: 'base'
-      }) === 0
+      const itemType = getType(itemValue)
+      if (getType(itemValue) === "string") {
+        result = result && itemValue.localeCompare(data.value, game.i18n.lang, {
+          sensitivity: 'base'
+        }) === 0
+      } else if (getType(itemValue) === "number") {
+        result = result && itemValue === Number(data.value)
+      }  else if (getType(itemValue) === "boolean") {
+        result = result && itemValue === (data.value === 'on')
+      }else {
+          result = result && itemValue === data.value
+      }
     }
     return result
   }

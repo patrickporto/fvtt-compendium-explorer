@@ -11,6 +11,15 @@ const getSystemSettings = async () => {
   }
 }
 
+Hooks.on("init", () => {
+  Handlebars.registerHelper('ifEquals', function(v1, v2, options) {
+    if(v1 === v2) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
+})
+
 Hooks.on("renderCompendium", async (app, html, data) => {
   const compendiumExplorerFilter = new CompendiumExplorerSidebar({
     system: await getSystemSettings(),

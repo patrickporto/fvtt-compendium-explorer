@@ -2,11 +2,12 @@
     <section class="compendium-explorer__filters">
         {{#each categories as |category|}}
             <h3 class="form-header">
-                {{#if category.icon}}<i class="fas fa-{{category.icon}} fa-fw"></i> {{/if}}{{category.label}}
+                {{#if category.icon}}<i class="fas fa-{{category.icon}} fa-fw"></i> {{/if}}{{localize category.label}}
             </h3>
             {{#each category.filters as |filter|}}
                 <div class="form-group">
                     <label class="resource-label">{{localize filter.label}}</label>
+                    <div class="form-fields">
                     {{#if filter.choices}}
                         <select name="{{filter.field}}">
                             <option value=""></option>
@@ -14,12 +15,18 @@
                             <option value="{{choice.value}}">{{localize choice.label}}</option>
                             {{/each}}
                         </select>
+                    {{else ifEquals filter.type "check"}}
+                    <input
+                        type="checkbox"
+                        name="{{filter.field}}"
+                    />
                     {{else}}
                     <input
                         type="text"
                         name="{{filter.field}}"
                     />
                     {{/if}}
+                    </div>
                 </div>
             {{/each}}
         {{/each}}

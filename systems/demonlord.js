@@ -1,9 +1,9 @@
-import createSystemSettings from "../scripts/systemSettings.js";
+import {createSystemSettings} from "../scripts/systemSettings.js";
 
 const system = {
   categories: {
     spell: {
-      label: "Spell",
+      label: "ITEM.TypeSpell",
       templateTypes: ['spell'],
       filters: {
         tradition: {

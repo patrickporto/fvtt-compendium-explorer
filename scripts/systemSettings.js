@@ -1,7 +1,7 @@
 const defaultSystemSettings = {
   categories: {
     general: {
-      label: "General",
+      label: "COMPENDIUMEXPLORER.General",
       filters: {
         itemType: {
           label: "Item Type",
@@ -16,8 +16,6 @@ const defaultSystemSettings = {
   }
 }
 
-const createSystemSettings = (systemSettings) => {
+export const createSystemSettings = (systemSettings) => {
   return mergeObject(defaultSystemSettings, systemSettings, {recursive: true})
 }
-
-export default createSystemSettings
