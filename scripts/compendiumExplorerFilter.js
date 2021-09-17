@@ -52,13 +52,12 @@ class CompendiumExplorerFilter {
   }
 
   cleanTemplateContainer = () => {
-    const width = parseFloat(this.html.css("width"))
-    this.html.css({
+    const width = parseFloat(this.html.closest(".app").css("width"))
+    this.html.closest(".app").css({
       width: `${width + this.metadata.width}px`
     })
 
-    this.html.find('.window-content').addClass('compendium-filter__window-content')
-    this.html.find('.compendium-filter').remove();
+    this.html.closest(".app").find('.window-content').addClass('compendium-filter__window-content')
   }
 
   getTemplateData = () => {
@@ -78,11 +77,12 @@ class CompendiumExplorerFilter {
 
   async render() {
     this.cleanTemplateContainer()
+    if (this.html.closest(".app").find('#compendium-filter').length > 0) return
     const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-filter.html`, this.getTemplateData())
     const $template = $(template)
     $template.find(".compendium-filter__apply").on('click', this._handleFilter)
     $template.find(".compendium-filter__clear").on('click', this._handleClear)
-    $template.insertBefore(this.html.find('.compendium.directory'));
+    $template.insertBefore(this.html.closest(".app").find('.compendium.directory'));
   }
 }
 
