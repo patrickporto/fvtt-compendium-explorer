@@ -61,7 +61,7 @@ class CompendiumExplorerSidebar {
   }
 
   getTemplateData = () => {
-    const categories = this.system.categories.filter(category => {
+    const categories = Object.values(this.system.categories).filter(category => {
       if (!category.templateTypes) return true
       for (const type of category.templateTypes) {
         if (this.compendiumTypes.has(type)) {
@@ -76,8 +76,9 @@ class CompendiumExplorerSidebar {
   }
 
   async render() {
-    this.cleanTemplateContainer()
+    if (this.compendium.documentName !== "Item") return
     if (this.html.closest(".app").find('#compendium-explorer').length > 0) return
+    this.cleanTemplateContainer()
     const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-explorer.html`, this.getTemplateData())
     const $template = $(template)
     $template.find(".compendium-explorer__apply").on('click', this._handleFilter)
