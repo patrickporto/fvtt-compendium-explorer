@@ -1,4 +1,4 @@
-import {createSystemSettings} from "../scripts/systemSettings.js";
+import {createSystemSettings} from "../systemSettings.js";
 
 const system = {
   categories: {
