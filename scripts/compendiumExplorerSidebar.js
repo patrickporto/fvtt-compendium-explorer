@@ -1,4 +1,5 @@
 import {TEMPLATE_PATH} from "./constants.js";
+import CompendiumExplorerFilter from "./compendiumExplorerFilter.js";
 
 class CompendiumExplorerSidebar {
   metadata = {
@@ -19,40 +20,19 @@ class CompendiumExplorerSidebar {
     this.compendiumTypes = new Set(Array.from(this.compendium.index).map(item => item.type))
   }
 
-  applyFilter = async(formData, directoryItem) => {
-    const documentId = directoryItem.dataset.documentId
-    const document = await this.compendium.getDocument(documentId)
-    let result = true
-    for (const data of formData) {
-      if (!data.value) continue
-      const itemValue = getProperty(document, data.name) || ""
-      if (getType(itemValue) === "string") {
-        result = result && itemValue.localeCompare(data.value, game.i18n.lang, {
-          sensitivity: 'base'
-        }) === 0
-      } else if (getType(itemValue) === "number") {
-        result = result && itemValue === Number(data.value)
-      }  else if (getType(itemValue) === "boolean") {
-        result = result && itemValue === (data.value === 'on')
-      }else {
-          result = result && itemValue === data.value
-      }
-    }
-    return result
-  }
-
   _handleFilter = async () => {
     const directoryItems = this.html.find(".directory-list .directory-item:not(.compendium-folder):not(.hidden)")
     const formData = $("#compendium-explorer").serializeArray()
-    const results = await Promise.all(directoryItems.map((_, directoryItem) => this.applyFilter(formData, directoryItem)))
-    directoryItems.css({ display: "none"}).filter((index, directoryItem) => {
-      return results[index]
-    }).css({display: "flex"})
+    const compendiumExplorerFilter = new CompendiumExplorerFilter({
+      directoryItems,
+      compendium: this.compendium
+    })
+    await compendiumExplorerFilter.apply(formData)
   }
 
   _handleClear = async () => {
-    const directoryItems = this.html.find(".directory-list > .directory-item:not(.compendium-folder):not(.hidden)")
-    directoryItems.css({display: "flex"})
+    const compendiumExplorerFilter = new CompendiumExplorerFilter({directoryItems})
+    await compendiumExplorerFilter.clear()
   }
 
   cleanTemplateContainer = () => {

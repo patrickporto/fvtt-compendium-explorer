@@ -12,7 +12,8 @@ const system = {
         },
         rank: {
           label: "DL.SpellRank",
-          field: "data.data.rank"
+          field: "data.data.rank",
+          type: "number"
         },
         spellType: {
           label: "DL.SpellType",
@@ -51,7 +52,7 @@ const system = {
         {
           label: "DL.ItemValue",
           field: "data.data.value",
-          type: "Number"
+          type: "number"
         }
       ]
     },
