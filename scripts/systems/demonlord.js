@@ -51,8 +51,7 @@ const system = {
       filters: [
         {
           label: "DL.ItemValue",
-          field: "data.data.value",
-          type: "number"
+          field: "data.data.value"
         }
       ]
     },
