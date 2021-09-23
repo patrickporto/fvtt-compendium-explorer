@@ -1,7 +1,23 @@
 import {createSystemSettings} from "../systemSettings.js";
 
+const configToChoices = obj => Object.entries(obj).map(([key, value]) => ({"label": value, "value": key}))
+
 const system = {
   categories: {
+    items: {
+      filters: {
+        actionType: {
+          label: 'DND5E.ItemActionType',
+          field: "data.data.actionType",
+          choices: configToChoices(CONFIG.DND5E.itemActionTypes)
+        },
+        damageTypes: {
+          label: 'DND5E.Damage',
+          field: "$derivedFields.damageTypes",
+          choices: configToChoices(CONFIG.DND5E.damageTypes)
+        }
+      }
+    },
     spell: {
       label: "ITEM.TypeSpell",
       documentTypes: ['item'],
@@ -101,6 +117,11 @@ const system = {
           ],
         }
       }
+    }
+  },
+  derivedFields: {
+    damageTypes: (document) => {
+      return document.data.data.damage.parts.map(part => part[1])
     }
   }
 }

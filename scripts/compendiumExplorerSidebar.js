@@ -26,7 +26,8 @@ class CompendiumExplorerSidebar {
     const formData = $("#compendium-explorer").serializeArray()
     const compendiumExplorerFilter = new CompendiumExplorerFilter({
       directoryItems,
-      compendium: this.compendium
+      compendium: this.compendium,
+      system: this.system
     })
     await compendiumExplorerFilter.apply(formData)
   }
