@@ -1,5 +1,6 @@
 import {TEMPLATE_PATH} from "./constants.js";
 import CompendiumExplorerFilter from "./compendiumExplorerFilter.js";
+import LookupField from "./lookupField.js";
 
 class CompendiumExplorerSidebar {
   metadata = {
@@ -44,7 +45,7 @@ class CompendiumExplorerSidebar {
     this.html.closest(".app").find('.window-content').addClass('compendium-explorer__window-content')
   }
 
-  getTemplateData = () => {
+  getTemplateData = async () => {
     const categories = Object.values(this.system.categories).filter(category => {
       if (!category.templateTypes) return true
       for (const type of category.templateTypes) {
@@ -54,8 +55,15 @@ class CompendiumExplorerSidebar {
       }
       return false
     })
+    const compendiumContent = await this.compendium.getContent()
+    const lookupFields = Object.values(this.system.lookupFields).reduce((fields, field) => {
+        const lookupField = new LookupField(compendiumContent, field)
+        fields[field] = lookupField.getValues()
+        return fields
+      }, {})
     return {
       categories,
+      lookupFields
     }
   }
 
@@ -63,7 +71,8 @@ class CompendiumExplorerSidebar {
     if (this.compendium.documentName !== "Item") return
     if (this.html.closest(".app").find('#compendium-explorer').length > 0) return
     this.cleanTemplateContainer()
-    const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-explorer.html`, this.getTemplateData())
+    const templateData = await this.getTemplateData()
+    const template = await renderTemplate(`${TEMPLATE_PATH}/compendium-explorer.html`, templateData)
     const $template = $(template)
     $template.find(".compendium-explorer__apply").on('click', this._handleFilter)
     $template.find(".compendium-explorer__clear").on('click', this._handleClear)

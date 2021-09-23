@@ -9,7 +9,14 @@
                     <label class="resource-label">{{localize filter.label}}</label>
                     <input type="hidden" name="$type__{{filter.field}}" value="{{filter.type}}" />
                     <div class="form-fields">
-                    {{#if filter.choices}}
+                    {{#if (lookup @root.lookupFields filter.field)}}
+                        <select name="{{filter.field}}">
+                            <option value=""></option>
+                            {{#each (lookup @root.lookupFields filter.field) as |choice key|}}
+                            <option value="{{choice}}">{{choice}}</option>
+                            {{/each}}
+                        </select>
+                    {{else if filter.choices}}
                         <select name="{{filter.field}}">
                             <option value=""></option>
                             {{#each filter.choices as |choice key|}}

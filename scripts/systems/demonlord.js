@@ -55,6 +55,9 @@ const system = {
         }
       ]
     },
+  },
+  lookupFields: {
+    tradition: 'data.data.tradition'
   }
 }
 

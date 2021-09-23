@@ -13,7 +13,8 @@ const defaultSystemSettings = {
         }
       }
     },
-  }
+  },
+  lookupFields: {}
 }
 
 export const createSystemSettings = (systemSettings) => {
