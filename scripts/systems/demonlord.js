@@ -5,6 +5,7 @@ const system = {
     spell: {
       label: "ITEM.TypeSpell",
       templateTypes: ['spell'],
+      documentTypes: ['item'],
       filters: {
         tradition: {
           label: "DL.MagicTradition",
@@ -48,11 +49,34 @@ const system = {
     equipment: {
       label: "Equipment",
       templateTypes: ['weapon', 'item', 'armor', 'ammo'],
+      documentTypes: ['item'],
       filters: [
         {
           label: "DL.ItemValue",
           field: "data.data.value"
         }
+      ]
+    },
+    creature: {
+      label: "Creature",
+      templateTypes: ['creature'],
+      documentTypes: ['actor'],
+      filters: [
+        {
+          label: "DL.CreatureDifficulty",
+          field: "data.data.difficulty",
+          type: "number"
+        },
+        {
+          label: "DL.CreatureHorrifying",
+          field: "data.data.horrifying",
+          type: "check"
+        },
+        {
+          label: "DL.CreatureFrightening",
+          field: "data.data.frightening",
+          type: "check"
+        },
       ]
     },
   },

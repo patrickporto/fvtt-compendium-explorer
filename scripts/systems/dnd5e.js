@@ -4,6 +4,7 @@ const system = {
   categories: {
     spell: {
       label: "ITEM.TypeSpell",
+      documentTypes: ['item'],
       templateTypes: ['spell'],
       filters: {
         level: {
@@ -40,6 +41,7 @@ const system = {
     },
     spellComponents: {
       label: "DND5E.SpellComponents",
+      documentTypes: ['item'],
       templateTypes: ['spell'],
       filters: {
         verbal: {
@@ -71,6 +73,7 @@ const system = {
     },
     equipments: {
       label: "ITEM.TypeEquipment",
+      documentTypes: ['item'],
       templateTypes: ['equipment'],
       filters:{
         price: {
@@ -81,6 +84,7 @@ const system = {
     },
     weapon: {
       label: "ITEM.TypeWeapon",
+      documentTypes: ['item'],
       templateTypes: ['weapon'],
       filters:{
         price: {

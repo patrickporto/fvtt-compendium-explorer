@@ -48,13 +48,11 @@ class CompendiumExplorerSidebar {
 
   getTemplateData = async () => {
     const categories = Object.values(this.system.categories).filter(category => {
-      if (!category.templateTypes) return true
-      for (const type of category.templateTypes) {
-        if (this.compendiumTypes.has(type)) {
-          return true
-        }
-      }
-      return false
+      const hasTemplateType = category?.templateTypes?.reduce((result, type) => {
+        return result && this.compendiumTypes.has(type)
+      }, true) ?? true
+      const hasDocumentType = category?.documentTypes?.includes(this.compendium.documentName.toLowerCase()) ?? false
+      return hasTemplateType && hasDocumentType
     })
     const compendiumContent = await this.compendium.getContent()
     const lookupFields = Object.values(this.system.lookupFields).reduce((fields, field) => {
@@ -69,7 +67,7 @@ class CompendiumExplorerSidebar {
   }
 
   async render() {
-    if (this.compendium.documentName !== "Item") return
+    // if (this.compendium.documentName !== "Item") return
     if (this.html.closest(".app").find('#compendium-explorer').length > 0) return
     this.cleanTemplateContainer()
     const templateData = await this.getTemplateData()
