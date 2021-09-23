@@ -42,16 +42,7 @@ const system = {
         school: {
           label: "DND5E.SpellSchool",
           field: "data.data.school",
-          choices: [
-            {label: "DND5E.SchoolAbj", value: "abj"},
-            {label: "DND5E.SchoolCon", value: "con"},
-            {label: "DND5E.SchoolDiv", value: "div"},
-            {label: "DND5E.SchoolEnc", value: "enc"},
-            {label: "DND5E.SchoolEvo", value: "evo"},
-            {label: "DND5E.SchoolIll", value: "ill"},
-            {label: "DND5E.SchoolNec", value: "nec"},
-            {label: "DND5E.SchoolTrs", value: "trs"}
-          ],
+          choices: configToChoices(CONFIG.DND5E.spellSchools),
         },
       }
     },
@@ -115,6 +106,23 @@ const system = {
             {label: "DND5E.WeaponImprov", value: "improv"},
             {label: "DND5E.WeaponSiege", value: "siege"}
           ],
+        }
+      }
+    },
+    npc: {
+      label: "ACTOR.TypeNpc",
+      documentTypes: ['actor'],
+      templateTypes: ['npc'],
+      filters:{
+        size: {
+          label: "DND5E.Size",
+          field: "data.data.traits.size",
+          choices: configToChoices(CONFIG.DND5E.actorSizes),
+        },
+        cr: {
+          label: "DND5E.AbbreviationCR",
+          field: "data.data.details.cr",
+          type: "number"
         }
       }
     }
