@@ -6,7 +6,8 @@ class LookupField {
 
   getValues() {
     const items = this.compendiumContent
-    return Array.from(new Set(items.map(item => getProperty(item, this.field)).filter(Boolean)))
+
+    return Array.from(new Set(items.map(item => getProperty(item, this.field)).filter(Boolean))).sort()
   }
 }
 
