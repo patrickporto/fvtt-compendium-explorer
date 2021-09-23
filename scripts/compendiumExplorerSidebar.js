@@ -32,6 +32,7 @@ class CompendiumExplorerSidebar {
   }
 
   _handleClear = async () => {
+    const directoryItems = this.html.find(".directory-list .directory-item:not(.compendium-folder):not(.hidden)")
     const compendiumExplorerFilter = new CompendiumExplorerFilter({directoryItems})
     await compendiumExplorerFilter.clear()
   }
